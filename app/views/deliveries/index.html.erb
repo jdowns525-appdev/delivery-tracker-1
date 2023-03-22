@@ -38,8 +38,9 @@
           Details
         </label>
 
-        <input type="text" id="details_box" name="query_details">
+        <textarea id="details_box" name="query_details" rows="3"></textarea>
       </div>
+
 
       <button>
         Log delivery
@@ -49,7 +50,7 @@
 </div>
 
 <hr>
-<div class="waiting_on">
+<div class="waiting_on" style="background-color: lightgoldenrodyellow;">
   <h2>Waiting on</h2>
 
 <% @list_of_working_deliveries.each do |a_delivery| %>
@@ -60,7 +61,7 @@
         
 
       <div style="color: red">
-        Supposed to arrive <%= a_delivery.updated_at.strftime("on %Y-%m-%d") %>
+        Supposed to arrive on <%= a_delivery.updated_at.strftime("%Y-%m-%d") %>
       </div>
 
       
@@ -69,7 +70,7 @@
 
       <div>
         <form action="/modify_delivery/<%= a_delivery.id%>" method="post">
-        <input type="hidden" name="query_status" value="received">
+        <input type="hidden" name="arrived" value="true">
 
           <button>Mark as received</button>
         </form>
@@ -79,7 +80,7 @@
 <% end %>
 </div>
 
-<div class="received">
+<div class="received" style="background-color: lightgreen;" >
 
   <h2>Received</h2>
 
@@ -88,7 +89,7 @@
       <li>
         <div><%= a_delivery.description %></div>
 
-        <small> <%#\= time_ago_in_words(the_delivery.updated_at) %> ago
+        <small> Updated <%= time_ago_in_words(a_delivery.updated_at) %> 
 
           <a href="/delete_delivery/<%= a_delivery.id %>">Delete</a>
         </small>        

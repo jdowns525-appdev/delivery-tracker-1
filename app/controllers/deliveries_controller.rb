@@ -40,7 +40,7 @@ class DeliveriesController < ApplicationController
     the_id = params.fetch("path_id")
     the_delivery = Delivery.where({ :id => the_id }).at(0)
 
-    the_delivery.status = params.fetch("query_status")
+    the_delivery.status = params.fetch("arrived")
     
     the_delivery.status = "received"
     the_delivery.user_id = session.fetch(:user_id)
