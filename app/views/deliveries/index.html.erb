@@ -61,7 +61,7 @@
         
 
       <div style="color: red">
-        Supposed to arrive on <%= a_delivery.updated_at.strftime("%Y-%m-%d") %>
+        Supposed to arrive on <%= a_delivery.updated_at.strftime(" %Y-%m-%d") %>
       </div>
 
       
@@ -89,7 +89,8 @@
       <li>
         <div><%= a_delivery.description %></div>
 
-        <small> Updated <%= time_ago_in_words(a_delivery.updated_at) %> 
+        <small> Updated <%= time_ago_in_words(a_delivery.updated_at) %> ago
+
 
           <a href="/delete_delivery/<%= a_delivery.id %>">Delete</a>
         </small>        
