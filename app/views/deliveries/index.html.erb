@@ -59,12 +59,15 @@
     <li>
       <div><%= a_delivery.description %></div>
         
-
-      <div style="color: red">
-        Supposed to arrive on <%= a_delivery.updated_at.strftime("%Y-%m-%d") %>
-
-      </div>
-
+<% if a_delivery.updated_at < 3.days.ago %>
+    <div style="color: red">
+            Supposed to arrive on <%= a_delivery.updated_at.strftime("%Y-%m-%d") %>
+          </div>
+        <% else %>
+          <div style="color: black">
+            Supposed to arrive on <%= a_delivery.updated_at.strftime("%Y-%m-%d") %>
+          </div>
+        <% end %>
       
       <div><%= a_delivery.detail %></div>
       

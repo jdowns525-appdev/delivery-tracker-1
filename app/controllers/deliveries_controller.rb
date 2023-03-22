@@ -25,6 +25,7 @@ class DeliveriesController < ApplicationController
     
     the_delivery.detail = params.fetch("query_details")
     the_delivery.description = params.fetch("query_description")
+    the_delivery.updated_at = params.fetch("query_supposed_to_arrive_on")
     the_delivery.status = "waiting_on"
     the_delivery.user_id = session.fetch(:user_id)
 
