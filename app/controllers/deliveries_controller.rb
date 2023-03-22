@@ -1,11 +1,11 @@
 class DeliveriesController < ApplicationController
   def index
     
-    matching_deliveries = Delivery.all
+    matching_deliveries = Delivery.where({:user_id => session.fetch(:user_id) })
 
     @list_of_deliveries = matching_deliveries.order({ :created_at => :desc })
-    @working_on = matching_deliveries.where( :status => "working_on")
-    @done = matching_deliveries.where( :status => "recieved")
+    @list_of_working_deliveries = matching_deliveries.where({ :status => "waiting_on" })
+    @received = matching_deliveries.where({ :status => "received" })
 
     render({ :template => "deliveries/index.html.erb" })
   end
@@ -25,12 +25,12 @@ class DeliveriesController < ApplicationController
     
     the_delivery.detail = params.fetch("query_details")
     the_delivery.description = params.fetch("query_description")
-    the_delivery.status = "received"
+    the_delivery.status = "waiting_on"
     the_delivery.user_id = session.fetch(:user_id)
 
     if the_delivery.valid?
       the_delivery.save
-      redirect_to("/", { :notice => "Delivery created successfully." })
+      redirect_to("/", { :notice => "Added to list." })
     else
       redirect_to("/", { :alert => the_delivery.errors.full_messages.to_sentence })
     end
@@ -40,13 +40,14 @@ class DeliveriesController < ApplicationController
     the_id = params.fetch("path_id")
     the_delivery = Delivery.where({ :id => the_id }).at(0)
 
-    the_delivery.status = params.fetch("received")
-    #the_delivery.description = params.fetch("q")
+    the_delivery.status = params.fetch("query_status")
+    
+    the_delivery.status = "received"
     the_delivery.user_id = session.fetch(:user_id)
 
     if the_delivery.valid?
       the_delivery.save
-      redirect_to("/deliveries", { :notice => "Delivery updated successfully."} )
+      redirect_to("/deliveries", { :notice => "Marked as received."} )
     else
       redirect_to("/deliveries", { :alert => the_delivery.errors.full_messages.to_sentence })
     end
@@ -58,6 +59,6 @@ class DeliveriesController < ApplicationController
 
     the_delivery.destroy
 
-    redirect_to("/", { :notice => "Delivery deleted successfully."} )
+    redirect_to("/", { :notice => "Deleted."} )
   end
 end

@@ -13,5 +13,5 @@ class User < ApplicationRecord
   validates :email, :presence => true
   has_secure_password
 
-  has_many(:deliveries, { :class_name => "Delivery", :foreign_key => "user_id", :dependent => :destroy })
+  #has_many(:deliveries, { :class_name => "Delivery", :foreign_key => "user_id", :dependent => :destroy })
 end
