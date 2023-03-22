@@ -27,13 +27,6 @@
       </dd>
 
       <dt>
-        User
-      </dt>
-      <dd>
-        <%= @the_delivery.user_id %>
-      </dd>
-
-      <dt>
         Delivery date
       </dt>
       <dd>
@@ -52,13 +45,6 @@
       </dt>
       <dd>
         <%= @the_delivery.description %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_delivery.created_at) %> ago
       </dd>
 
       <dt>
@@ -102,7 +88,7 @@
           Delivery date
         </label>
 
-        <input type="date" id="delivery_date_box" name="query_delivery_date" value="<%= @the_delivery.delivery_date %>">
+        <input type="date" id="delivery_date_box" name="query_supposed_to_arrive_on" value="<%= @the_delivery.delivery_date %>">
       </div>
 
       <div>
@@ -110,7 +96,7 @@
           Detail
         </label>
 
-        <input type="text" id="detail_box" name="query_detail" value="<%= @the_delivery.detail %>">
+        <input type="text" id="detail_box" name="query_details" value="<%= @the_delivery.detail %>">
       </div>
 
       <div>
